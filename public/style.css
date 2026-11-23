@@ -1,0 +1,682 @@
+/*
+  Stored XSS Demonstration and Prevention Project
+  BTech Cybersecurity Semester Project
+  Simple, clean student-developed stylesheet
+*/
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f4f6f8;
+    color: #333333;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+/* Header & Navigation */
+header {
+    background-color: #0b3c5d;
+    color: #ffffff;
+    padding: 20px 0;
+    border-bottom: 3px solid #072b43;
+}
+
+header .header-content {
+    width: 90%;
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+header h1 {
+    margin: 0 0 5px 0;
+    font-size: 24px;
+    color: #ffffff;
+}
+
+header p {
+    margin: 0;
+    font-size: 14px;
+    color: #dbe4eb;
+}
+
+nav {
+    background-color: #1d2731;
+    padding: 10px 0;
+}
+
+nav .nav-content {
+    width: 90%;
+    max-width: 960px;
+    margin: 0 auto;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+nav a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 13px;
+    padding: 6px 10px;
+    border-radius: 3px;
+}
+
+nav a:hover, nav a.active {
+    background-color: #0b3c5d;
+}
+
+nav a.vuln-link {
+    color: #ff9999;
+}
+
+nav a.secure-link {
+    color: #a8f5c8;
+}
+
+/* Main Layout */
+.container {
+    width: 90%;
+    max-width: 960px;
+    margin: 25px auto 40px auto;
+}
+
+/* Content Boxes / Cards */
+.box {
+    background-color: #ffffff;
+    border: 1px solid #d0d7de;
+    border-radius: 4px;
+    padding: 22px;
+    margin-bottom: 25px;
+}
+
+h2, h3, h4 {
+    color: #0b3c5d;
+    margin-top: 0;
+}
+
+h2 {
+    font-size: 20px;
+    border-bottom: 2px solid #eef2f5;
+    padding-bottom: 8px;
+    margin-bottom: 15px;
+}
+
+h3 {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+/* Form Styles */
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
+textarea, input[type="text"] {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px;
+    font-size: 14px;
+    font-family: Arial, sans-serif;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+}
+
+textarea {
+    height: 90px;
+    resize: vertical;
+}
+
+textarea:focus, input[type="text"]:focus {
+    border-color: #0b3c5d;
+    outline: none;
+}
+
+.hint {
+    font-size: 12px;
+    color: #666666;
+    margin-top: 4px;
+}
+
+/* Buttons */
+.btn {
+    display: inline-block;
+    padding: 8px 16px;
+    font-size: 13px;
+    font-weight: bold;
+    text-decoration: none;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.btn-primary {
+    background-color: #0b3c5d;
+    color: #ffffff;
+}
+
+.btn-primary:hover {
+    background-color: #072b43;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    color: #ffffff;
+}
+
+.btn-secondary:hover {
+    background-color: #565e64;
+}
+
+.btn-danger {
+    background-color: #c62828;
+    color: #ffffff;
+}
+
+.btn-danger:hover {
+    background-color: #a01f1f;
+}
+
+.btn-warning {
+    background-color: #d97706;
+    color: #ffffff;
+}
+
+.btn-warning:hover {
+    background-color: #b45309;
+}
+
+.btn-success {
+    background-color: #2e7d32;
+    color: #ffffff;
+}
+
+.btn-success:hover {
+    background-color: #1b5e20;
+}
+
+/* Alerts */
+.alert {
+    padding: 12px 15px;
+    border-radius: 4px;
+    margin-bottom: 18px;
+    font-size: 14px;
+}
+
+.alert-success {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+    border: 1px solid #c8e6c9;
+}
+
+.alert-error {
+    background-color: #ffebee;
+    color: #c62828;
+    border: 1px solid #ffcdd2;
+}
+
+.alert-warning {
+    background-color: #fff3cd;
+    color: #856404;
+    border: 1px solid #ffeeba;
+}
+
+.alert-info {
+    background-color: #e3f2fd;
+    color: #0b3c5d;
+    border: 1px solid #bbdefb;
+}
+
+/* Comments List */
+.comment-item {
+    border: 1px solid #e0e0e0;
+    border-left: 4px solid #0b3c5d;
+    background-color: #fafbfc;
+    padding: 12px 15px;
+    margin-bottom: 12px;
+    border-radius: 3px;
+}
+
+.comment-meta {
+    font-size: 12px;
+    color: #666666;
+    margin-bottom: 6px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.comment-text {
+    font-size: 14px;
+    color: #222222;
+    word-break: break-word;
+    white-space: pre-wrap;
+}
+
+/* Tables */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 12px;
+    font-size: 13px;
+}
+
+th, td {
+    border: 1px solid #d0d7de;
+    padding: 9px 11px;
+    text-align: left;
+    vertical-align: top;
+}
+
+th {
+    background-color: #eef2f5;
+    color: #0b3c5d;
+    font-weight: bold;
+}
+
+tr:nth-child(even) {
+    background-color: #fafbfc;
+}
+
+/* Status Badges */
+.badge-pass {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+    border: 1px solid #a5d6a7;
+    padding: 3px 8px;
+    border-radius: 3px;
+    font-weight: bold;
+    font-size: 11px;
+    display: inline-block;
+}
+
+.badge-fail {
+    background-color: #ffebee;
+    color: #c62828;
+    border: 1px solid #ef9a9a;
+    padding: 3px 8px;
+    border-radius: 3px;
+    font-weight: bold;
+    font-size: 11px;
+    display: inline-block;
+}
+
+.badge-safe {
+    background-color: #e3f2fd;
+    color: #0b3c5d;
+    border: 1px solid #bbdefb;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 11px;
+}
+
+.badge-modified {
+    background-color: #ffebee;
+    color: #c62828;
+    border: 1px solid #ef9a9a;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+code {
+    background-color: #f1f3f5;
+    color: #9013fe;
+    padding: 2px 4px;
+    border-radius: 3px;
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 12px;
+}
+
+/* Before and After Comparison Grid */
+.comparison-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin: 15px 0;
+}
+
+.comparison-col {
+    padding: 14px;
+    border-radius: 4px;
+    font-size: 13px;
+}
+
+.comparison-before {
+    background-color: #f6f8fa;
+    border: 1px solid #d0d7de;
+    border-left: 4px solid #2e7d32;
+}
+
+.comparison-after {
+    background-color: #fff8f8;
+    border: 1px solid #ffcdd2;
+    border-left: 4px solid #c62828;
+}
+
+/* Request-Response Flow Diagram */
+.flow-diagram {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #fafbfc;
+    border: 1px solid #d0d7de;
+    padding: 15px;
+    border-radius: 4px;
+    margin: 15px 0;
+    font-size: 12px;
+}
+
+.flow-node {
+    padding: 8px 12px;
+    border-radius: 4px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.flow-client {
+    background-color: #e3f2fd;
+    color: #0b3c5d;
+    border: 1px solid #bbdefb;
+}
+
+.flow-server {
+    background-color: #fff3cd;
+    color: #856404;
+    border: 1px solid #ffeeba;
+}
+
+.flow-browser {
+    background-color: #ffebee;
+    color: #c62828;
+    border: 1px solid #ffcdd2;
+}
+
+.flow-arrow {
+    font-size: 16px;
+    color: #666;
+    font-weight: bold;
+}
+
+/* Visible Website Defacement Simulation Styles */
+.defacement-banner {
+    border: 2px solid #c62828;
+    background-color: #ffebee;
+    color: #b71c1c;
+    padding: 14px 18px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.defaced-card {
+    background-color: #ffebee !important;
+    border: 1px solid #ef9a9a !important;
+    border-left: 5px solid #c62828 !important;
+}
+
+.sample-portal-box {
+    padding: 14px 16px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    transition: all 0.2s ease;
+}
+
+.sample-portal-normal {
+    background-color: #e8f5e9;
+    border: 1px solid #c8e6c9;
+    border-left: 5px solid #2e7d32;
+}
+
+.sample-portal-blue {
+    background-color: #e3f2fd;
+    border: 1px solid #bbdefb;
+    border-left: 5px solid #0b3c5d;
+}
+
+/* System Operational & Compromise Status Badges */
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 0.3px;
+}
+
+.status-operational {
+    background-color: #e8f5e9;
+    color: #1b5e20;
+    border: 1px solid #81c784;
+}
+
+.status-compromised {
+    background-color: #ffebee;
+    color: #b71c1c;
+    border: 1px solid #e57373;
+    animation: none;
+}
+
+.status-protected {
+    background-color: #e8f5e9;
+    color: #1b5e20;
+    border: 1px solid #81c784;
+}
+
+/* Reusable Full-Width Security Compromise Alert Banner */
+.security-compromise-banner {
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #fff5f5;
+    border: 2px solid #c62828;
+    border-left: 6px solid #b71c1c;
+    border-radius: 4px;
+    padding: 18px 22px;
+    margin-bottom: 22px;
+    box-shadow: 0 2px 8px rgba(198, 40, 40, 0.12);
+}
+
+.security-compromise-banner .banner-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    border-bottom: 1px solid #ffcdd2;
+    padding-bottom: 12px;
+    margin-bottom: 14px;
+}
+
+.security-compromise-banner .banner-icon {
+    font-size: 32px;
+    line-height: 1;
+    flex-shrink: 0;
+}
+
+.security-compromise-banner .banner-title-group {
+    flex: 1;
+}
+
+.security-compromise-banner .banner-tags {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    margin-bottom: 6px;
+    flex-wrap: wrap;
+}
+
+.security-compromise-banner .attack-type-badge {
+    background-color: #0b3c5d;
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 2px 8px;
+    border-radius: 3px;
+    text-transform: uppercase;
+}
+
+.security-compromise-banner .simulation-badge {
+    background-color: #c62828;
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: bold;
+    padding: 2px 8px;
+    border-radius: 3px;
+    text-transform: uppercase;
+}
+
+.security-compromise-banner .banner-heading {
+    color: #b71c1c;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0;
+    border: none;
+    padding: 0;
+    letter-spacing: 0.3px;
+}
+
+.security-compromise-banner .banner-desc {
+    font-size: 14px;
+    color: #2b2b2b;
+    line-height: 1.5;
+    margin: 0 0 12px 0;
+}
+
+.security-compromise-banner .banner-impacts-box {
+    background-color: #ffffff;
+    border: 1px solid #ffcdd2;
+    border-radius: 4px;
+    padding: 12px 16px;
+    margin-bottom: 12px;
+}
+
+.security-compromise-banner .banner-impacts-box strong {
+    color: #b71c1c;
+    font-size: 13px;
+}
+
+.security-compromise-banner .banner-impacts-box ul {
+    margin: 6px 0 0 0;
+    padding-left: 20px;
+    font-size: 13px;
+    color: #333333;
+}
+
+.security-compromise-banner .banner-impacts-box li {
+    margin-bottom: 4px;
+}
+
+/* CIA Triad Impact Box */
+.cia-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 12px;
+    margin: 14px 0;
+}
+
+.cia-card {
+    background-color: #ffffff;
+    border: 1px solid #d0d7de;
+    border-radius: 4px;
+    padding: 12px 14px;
+    font-size: 13px;
+}
+
+.cia-card strong {
+    display: block;
+    margin-bottom: 4px;
+    color: #0b3c5d;
+}
+
+.cia-card.compromised {
+    border-left: 4px solid #c62828;
+    background-color: #fffbfb;
+}
+
+.cia-card.compromised strong {
+    color: #b71c1c;
+}
+
+.cia-card.preserved {
+    border-left: 4px solid #2e7d32;
+    background-color: #fbfdfb;
+}
+
+.cia-card.preserved strong {
+    color: #2e7d32;
+}
+
+.security-compromise-banner .banner-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 14px;
+}
+
+/* Sub-navigation for Demonstrations and Prevention */
+.subnav {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+    background-color: #eef2f5;
+    padding: 8px 12px;
+    border-radius: 4px;
+    border: 1px solid #d0d7de;
+}
+
+.subnav a {
+    color: #0b3c5d;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: bold;
+    padding: 6px 12px;
+    border-radius: 3px;
+}
+
+.subnav a:hover, .subnav a.active {
+    background-color: #0b3c5d;
+    color: #ffffff;
+}
+
+.subnav a.vuln-sublink.active {
+    background-color: #c62828;
+    color: #ffffff;
+}
+
+.subnav a.secure-sublink.active {
+    background-color: #2e7d32;
+    color: #ffffff;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    color: #666666;
+    font-size: 13px;
+    border-top: 1px solid #d0d7de;
+    background-color: #ffffff;
+    margin-top: 30px;
+}
+
+@media (max-width: 768px) {
+    .comparison-grid {
+        grid-template-columns: 1fr;
+    }
+    .flow-diagram {
+        flex-direction: column;
+        gap: 8px;
+    }
+    .flow-arrow {
+        transform: rotate(90deg);
+    }
+}

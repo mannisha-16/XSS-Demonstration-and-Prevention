@@ -1,0 +1,14 @@
+{
+  "name": "xss-demonstration-prevention",
+  "version": "1.0.0",
+  "description": "XSS Demonstration and Prevention Cybersecurity Project",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "Manisha",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}

@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1758012345678,
+    "comment": "Hello, this is my first comment.",
+    "createdAt": "2026-09-16T..."
+  },
+  {
+    "id": 1789577066026,
+    "comment": "          innerHTML      ",
+    "createdAt": "2026-09-16T16:44:26.026Z"
+  },
+  {
+    "id": 1789625571268,
+    "comment": "        Hiii        ",
+    "createdAt": "2026-09-17T06:12:51.268Z"
+  },
+  {
+    "id": 1789625608743,
+    "comment": "        <p>This is boring </p>        ",
+    "createdAt": "2026-09-17T06:13:28.743Z"
+  },
+  {
+    "id": 1789625912617,
+    "comment": "             <a> href =\"www.google.com\"</a>   ",
+    "createdAt": "2026-09-17T06:18:32.617Z"
+  },
+  {
+    "id": 1789625971965,
+    "comment": "             <a href=\"https://www.google.com\">Open Google</a> ",
+    "createdAt": "2026-09-17T06:19:31.965Z"
+  },
+  
+  {
+    "id": 1789967512046,
+    "comment": "           <script>alert(\"Stored XSS\")</script>     ",
+    "createdAt": "2026-09-21T05:11:52.046Z"
+  }
+]

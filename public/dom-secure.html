@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM-Based XSS - Protected Implementation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header>
+        <div class="header-content">
+            <h1>DOM-Based XSS (Protected Implementation)</h1>
+            <p>  Safe DOM APIs (textContent) &amp; CSP</p>
+        </div>
+    </header>
+
+    <!-- 5-Item Navigation -->
+    <nav>
+        <div class="nav-content">
+            <a href="/">Home</a>
+            <a href="/reflected-vulnerable">Reflected XSS</a>
+            <a href="/comments-vulnerable">Stored XSS</a>
+            <a href="/dom-demo">DOM-Based XSS</a>
+            <a href="/prevention" class="active">Prevention System</a>
+        </div>
+    </nav>
+
+    <main class="container">
+        <div class="box">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 15px;">
+                <h2 style="margin: 0; border: none; padding: 0;">DOM-Based XSS - Protected Demonstration</h2>
+                <div>
+                    <span class="status-badge status-protected">🛡️ PROTECTED</span>
+                    <a href="/dom-demo" class="btn btn-danger" style="font-size: 12px; margin-left: 8px;">View Vulnerable Demo &rarr;</a>
+                </div>
+            </div>
+
+            <p>
+                In this protected implementation, client-side JavaScript handles user data from the URL using the safe DOM property
+                <strong><code>textContent</code></strong> instead of <code>innerHTML</code>.
+                The browser treats user input strictly as plain text characters, preventing script execution, element instantiation, or unwanted page modification.
+            </p>
+
+            <div class="alert alert-success">
+                <strong>Protected Implementation:</strong> Even if a URL parameter contains malicious HTML markup or JavaScript event handlers,
+                the browser creates zero DOM elements. The page heading and sample status card remain 100% intact and operational.
+            </div>
+
+            <!-- DUMMY WEBSITE COMPONENT: Student Portal Dashboard (Preserved Original) -->
+            <div style="border: 1px solid #d0d7de; border-radius: 4px; padding: 18px; margin-bottom: 20px; background-color: #fafbfc;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                    <strong style="color: #0b3c5d; font-size: 14px;">Sample Website: Student Information System Portal</strong>
+                    <span id="dom-status-badge" class="status-badge status-operational">
+                        ● System Operational (Protected)
+                    </span>
+                </div>
+                <h3 id="dom-page-heading" style="margin: 0 0 10px 0; color: #0b3c5d; font-size: 18px;">
+                    Student Portal Dashboard - Official Portal
+                </h3>
+
+                <!-- Target Status Card within Dashboard (Intact) -->
+                <div id="dom-sample-status-box" class="sample-portal-box sample-portal-normal">
+                    <strong id="dom-sample-status-title" style="color: #2e7d32; font-size: 14px;">Legitimate System Status: All Systems Operational</strong>
+                    <p id="dom-sample-status-text" style="margin: 5px 0 0 0; color: #333; font-size: 13px;">
+                        Digital library resources, campus Wi-Fi, and computer lab servers are functioning normally.
+                    </p>
+                </div>
+
+                <!-- Protected DOM Output Sink (Safe textContent) -->
+                <div id="output" style="margin-top: 10px;"></div>
+            </div>
+
+            <!-- Impact Comparison View -->
+            <h3>Vulnerable vs Protected Outcome Comparison</h3>
+            <div class="comparison-grid">
+                <div class="comparison-col comparison-after">
+                    <strong style="color: #c62828;">Vulnerable Demonstration</strong>
+                    <p style="margin: 5px 0 0 0;">Status: <span class="status-badge status-compromised">▲ CRITICAL COMPROMISE</span></p>
+                    <p style="margin: 4px 0 0 0; color: #555;">Untrusted input assigned to <code>innerHTML</code> triggers "DOM-BASED XSS — PAGE CONTENT MODIFIED", alters heading, and compromises dashboard.</p>
+                </div>
+                <div class="comparison-col comparison-before">
+                    <strong style="color: #2e7d32;">Protected Demonstration</strong>
+                    <p style="margin: 5px 0 0 0;">Status: <span class="status-badge status-operational">● System Operational</span></p>
+                    <p style="margin: 4px 0 0 0; color: #555;">Safe DOM API <code>textContent</code> treats input strictly as plain text. Heading and status card remain 100% intact.</p>
+                </div>
+            </div>
+
+            <!-- Preset Demonstration Payloads -->
+            <h3>Test Payloads Against Protected Endpoint:</h3>
+            <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 15px;">
+                <a href="/dom-secure?message=Welcome+to+the+Student+Portal." class="btn btn-secondary">Safe URL Message</a>
+                <a href="/dom-secure?message=%3Cimg+src%3Dx+onerror%3D%22alert(1)%22%3E" class="btn btn-secondary">
+                    Test Image Event Handler Payload
+                </a>
+                <a href="/dom-secure?message=%3Cdiv+class%3D%22defacement-banner%22%3E%3Cstrong%3E%E2%9A%A0%EF%B8%8F+Website+content+has+been+modified.%3C%2Fstrong%3E%3C%2Fdiv%3E" class="btn btn-secondary">
+                    Test Warning Banner Payload
+                </a>
+            </div>
+
+            <!-- Reset Button -->
+            <div style="margin: 20px 0; padding: 14px; background-color: #fafbfc; border: 1px solid #d0d7de; display: flex; justify-content: space-between; align-items: center; flex-wrap: gap; gap: 10px; border-radius: 4px;">
+                <div>
+                    <strong>Reset Page:</strong> Clears the URL parameter and restores original clean portal view.
+                </div>
+                <a href="/dom-secure" class="btn btn-warning">Reset Page</a>
+            </div>
+
+            <!-- Impact Explanation -->
+            <div style="padding: 12px 15px; background-color: #f8f9fa; border: 1px solid #e9ecef; border-radius: 4px; font-size: 13px; color: #555; margin-bottom: 20px;">
+                <strong>Explanation:</strong> In DOM-Based XSS, the vulnerability exists in client-side JavaScript that writes untrusted data into an execution sink like <code>innerHTML</code>. By switching to safe DOM APIs like <code>textContent</code> or <code>innerText</code>, the browser's HTML parser is never invoked, ensuring that untrusted strings cannot alter elements or modify website content.
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>XSS Demonstration and Prevention </p>
+    </footer>
+
+    <!-- Protected script uses safe textContent -->
+    <script src="dom-secure.js"></script>
+
+</body>
+
+</html>

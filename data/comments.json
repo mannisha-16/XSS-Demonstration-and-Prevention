@@ -1,0 +1,20 @@
+[
+  {
+    "id": 101,
+    "author": "Campus Administrator",
+    "comment": "Welcome to the College Project Portal. All academic systems and server nodes are operating normally.",
+    "createdAt": "01/11/2026, 09:00:00 am"
+  },
+  {
+    "id": 102,
+    "author": "Academic Office",
+    "comment": "Please submit semester project feedback and laboratory queries using this comment board.",
+    "createdAt": "01/11/2026, 09:15:00 am"
+  },
+  {
+    "id": 1793870293880,
+    "author": "User",
+    "comment": "<script> XSS stored</script>\r\n",
+    "createdAt": "5/11/2026, 2:48:13 pm"
+  }
+]

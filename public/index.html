@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XSS Demonstration and Prevention - BTech Cybersecurity Project</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <h1>XSS Demonstration and Prevention</h1>
+            <p>BTech Cybersecurity Semester Project | Visual Website Compromise Simulations &amp; Defense-in-Depth Prevention</p>
+        </div>
+    </header>
+
+    <!-- 5-Item Navigation (Strictly per Section 9) -->
+    <nav>
+        <div class="nav-content">
+            <a href="/" class="active">Home</a>
+            <a href="/reflected-vulnerable">Reflected XSS</a>
+            <a href="/comments-vulnerable">Stored XSS</a>
+            <a href="/dom-demo">DOM-Based XSS</a>
+            <a href="/prevention">Prevention System</a>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <main class="container">
+
+        <!-- Section 1: Introduction to Cross-Site Scripting -->
+        <div class="box">
+            <h2>Understanding Cross-Site Scripting (XSS)</h2>
+            <p>
+                <strong>Cross-Site Scripting (XSS)</strong> is a critical web application security vulnerability that occurs when an application
+                includes untrusted user-supplied data in a web page without proper validation or context-aware output encoding.
+                When the victim's browser parses this unescaped data, it executes attacker-supplied scripts within the trusted security context of the vulnerable website.
+            </p>
+            <p style="margin-bottom: 0;">
+                Rather than relying on basic browser popup alerts (<code>alert()</code>), this academic project demonstrates the true potential impact
+                of XSS through <strong>full-width security alert banners</strong>, <strong>simulated website defacement</strong>,
+                <strong>modified dummy announcements</strong>, and <strong>system status tampering</strong>, alongside corresponding Phase 2 defense-in-depth mitigations.
+            </p>
+        </div>
+
+        <!-- Section 2: Phase 1: XSS Vulnerability Demonstrations -->
+        <div class="box" id="demonstration">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 8px;">
+                <h2 style="margin: 0; border: none; padding: 0;">Phase 1: XSS Vulnerability Demonstrations</h2>
+                <span class="badge-fail" style="font-size: 12px; padding: 3px 8px;">Controlled Website Impact Simulations</span>
+            </div>
+            <p style="font-size: 13px; color: #555;">
+                Explore the three distinct execution pipelines and their visual website impact through controlled local simulations:
+            </p>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-top: 15px;">
+                
+                <!-- Card 1: Reflected XSS -->
+                <div class="box" style="border-top: 4px solid #c62828; margin: 0; display: flex; flex-direction: column; justify-content: space-between;">
+                    <div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                            <h3 style="margin: 0; font-size: 17px;">1. Reflected XSS</h3>
+                            <span class="badge-fail">Vulnerable</span>
+                        </div>
+                        <p style="font-size: 13px; color: #555; margin-bottom: 8px;">
+                            <strong>Delivery:</strong> HTTP Request Query &rarr; Server HTML Stream &rarr; Browser Execution.
+                        </p>
+                        <p style="font-size: 13px; line-height: 1.5;">
+                            Untrusted data supplied in a URL query parameter is reflected immediately in the server's HTML response.
+                            When triggered, it displays a full-width red banner (<em>"SECURITY ALERT — WEBSITE COMPROMISED"</em>)
+                            and alters the department notice board heading and system status to "CRITICAL COMPROMISE".
+                        </p>
+                    </div>
+                    <div style="margin-top: 15px;">
+                        <a href="/reflected-vulnerable" class="btn btn-danger" style="width: 100%; box-sizing: border-box; text-align: center;">
+                            Launch Reflected Demo &rarr;
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Card 2: Stored XSS -->
+                <div class="box" style="border-top: 4px solid #c62828; margin: 0; display: flex; flex-direction: column; justify-content: space-between;">
+                    <div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                            <h3 style="margin: 0; font-size: 17px;">2. Stored XSS</h3>
+                            <span class="badge-fail">Vulnerable</span>
+                        </div>
+                        <p style="font-size: 13px; color: #555; margin-bottom: 8px;">
+                            <strong>Delivery:</strong> Comment Form &rarr; Permanent JSON Storage &rarr; Rendered for All Visitors.
+                        </p>
+                        <p style="font-size: 13px; line-height: 1.5;">
+                            The payload is saved permanently in <code>comments.json</code>. Operating on a seamless <strong>single-page workflow</strong>,
+                            submitting a payload triggers the banner (<em>"STORED XSS ATTACK — WEBSITE CONTENT COMPROMISED"</em>), defaces the portal announcement,
+                            and <strong>persists across page reloads (F5)</strong> until reset.
+                        </p>
+                    </div>
+                    <div style="margin-top: 15px;">
+                        <a href="/comments-vulnerable" class="btn btn-danger" style="width: 100%; box-sizing: border-box; text-align: center;">
+                            Launch Stored Demo &rarr;
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Card 3: DOM-Based XSS -->
+                <div class="box" style="border-top: 4px solid #c62828; margin: 0; display: flex; flex-direction: column; justify-content: space-between;">
+                    <div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                            <h3 style="margin: 0; font-size: 17px;">3. DOM-Based XSS</h3>
+                            <span class="badge-fail">Vulnerable</span>
+                        </div>
+                        <p style="font-size: 13px; color: #555; margin-bottom: 8px;">
+                            <strong>Delivery:</strong> Client Parameter &rarr; JavaScript Parsing &rarr; Unsafe <code>innerHTML</code> Sink.
+                        </p>
+                        <p style="font-size: 13px; line-height: 1.5;">
+                            Client-side JavaScript reads untrusted URL data and inserts it directly into the DOM tree.
+                            Executing without any server-side reflection, it triggers the banner (<em>"DOM-BASED XSS — PAGE CONTENT MODIFIED"</em>)
+                            and modifies the student dashboard elements live in browser memory.
+                        </p>
+                    </div>
+                    <div style="margin-top: 15px;">
+                        <a href="/dom-demo" class="btn btn-danger" style="width: 100%; box-sizing: border-box; text-align: center;">
+                            Launch DOM Demo &rarr;
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Section 3: Prevention Mechanisms Overview -->
+        <div class="box">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 10px;">
+                <h2 style="margin: 0; border: none; padding: 0;">Phase 2: XSS Prevention Mechanisms</h2>
+                <a href="/prevention" class="btn btn-success" style="font-size: 12px;">Open Full Prevention Hub &rarr;</a>
+            </div>
+            <p style="font-size: 13px; color: #555;">
+                Phase 2 demonstrates how proper engineering principles neutralize XSS vulnerabilities at each layer of the application:
+            </p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 140px;">XSS Category</th>
+                        <th>Applied Prevention Controls</th>
+                        <th style="width: 280px; color: #2e7d32;">Protected Result</th>
+                        <th style="width: 150px;">Protected Demo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Reflected Prevention</strong></td>
+                        <td>Context-aware HTML entity encoding (<code>escapeHTML</code>) + Content Security Policy header</td>
+                        <td>Characters converted to safe HTML entities (<code>&amp;lt;script&amp;gt;</code>); notice board and "System Operational" status intact.</td>
+                        <td><a href="/reflected-secure" class="btn btn-success" style="font-size: 12px; padding: 4px 8px;">View Protected</a></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Stored Prevention</strong></td>
+                        <td>Server-side input validation + Safe DOM rendering via <code>textContent</code></td>
+                        <td>Stored comments rendered strictly as text nodes; college portal announcement remains green and untouched.</td>
+                        <td><a href="/stored-secure" class="btn btn-success" style="font-size: 12px; padding: 4px 8px;">View Protected</a></td>
+                    </tr>
+                    <tr>
+                        <td><strong>DOM Prevention</strong></td>
+                        <td>Safe DOM property (<code>output.textContent = message</code>), completely eliminating <code>innerHTML</code></td>
+                        <td>Browser HTML parser never invoked; 0 child elements instantiated; student dashboard status remains operational.</td>
+                        <td><a href="/dom-secure" class="btn btn-success" style="font-size: 12px; padding: 4px 8px;">View Protected</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Section 4: Academic Safety Notice -->
+        <div class="box" style="background-color: #fafbfc; border-left: 4px solid #0b3c5d;">
+            <h3 style="margin-top: 0; color: #0b3c5d; font-size: 16px;">Academic Simulation Safety Constraints</h3>
+            <p style="margin: 0; font-size: 13px; color: #555; line-height: 1.6;">
+                All demonstrations within this project operate strictly within local browser memory and local JSON storage on <code>localhost</code>.
+                In accordance with academic and ethical standards, this project does not perform real credential harvesting, cookie theft, data exfiltration,
+                or external network attacks. All defacement effects are controlled simulations designed for semester project evaluation.
+            </p>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p><strong>XSS Demonstration and Prevention</strong> | BTech Cybersecurity Semester Project</p>
+        <p>Department of Computer Science &amp; Cybersecurity | Academic Year 2026</p>
+    </footer>
+
+</body>
+
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM-Based XSS - Vulnerable Demonstration</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header>
+        <div class="header-content">
+            <h1>DOM-Based XSS Demonstration (Vulnerable)</h1>
+            <p> Flow: URL Parameter &rarr; Client JavaScript &rarr; DOM Sink (innerHTML)</p>
+        </div>
+    </header>
+
+    <!-- 5-Item Navigation -->
+    <nav>
+        <div class="nav-content">
+            <a href="/">Home</a>
+            <a href="/reflected-vulnerable">Reflected XSS</a>
+            <a href="/comments-vulnerable">Stored XSS</a>
+            <a href="/dom-demo" class="active">DOM-Based XSS</a>
+            <a href="/prevention">Prevention System</a>
+        </div>
+    </nav>
+
+    <main class="container">
+        <div class="box">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 15px;">
+                <h2 style="margin: 0; border: none; padding: 0;">DOM-Based XSS - Client-Side Page Modification</h2>
+                <div>
+                    <span class="badge-fail" style="font-size: 13px; padding: 5px 10px;">VULNERABLE DEMONSTRATION</span>
+                    <a href="/dom-secure" class="btn btn-success" style="font-size: 12px; margin-left: 8px;">View Protected Demo &rarr;</a>
+                </div>
+            </div>
+
+            <p>
+                This demonstration illustrates DOM-Based Cross-Site Scripting. Client-side JavaScript extracts untrusted data
+                from the URL parameter <code>?message=...</code> and inserts it directly into the webpage using the dangerous DOM execution sink <code>innerHTML</code>.
+            </p>
+
+            <!-- DUMMY WEBSITE COMPONENT: Student Portal Dashboard -->
+            <div style="border: 1px solid #d0d7de; border-radius: 4px; padding: 18px; margin-bottom: 20px; background-color: #fafbfc;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                    <strong style="color: #0b3c5d; font-size: 14px;">Sample Website: Student Information System Portal</strong>
+                    <span id="dom-status-badge" class="status-badge status-operational">
+                        ● System Operational
+                    </span>
+                </div>
+                <h3 id="dom-page-heading" style="margin: 0 0 10px 0; color: #0b3c5d; font-size: 18px;">
+                    Student Portal Dashboard - Official Portal
+                </h3>
+
+                <!-- Target Status Card within Dashboard -->
+                <div id="dom-sample-status-box" class="sample-portal-box sample-portal-normal">
+                    <strong id="dom-sample-status-title" style="color: #2e7d32; font-size: 14px;">Legitimate System Status: All Systems Operational</strong>
+                    <p id="dom-sample-status-text" style="margin: 5px 0 0 0; color: #333; font-size: 13px;">
+                        Digital library resources, campus Wi-Fi, and computer lab servers are functioning normally.
+                    </p>
+                </div>
+
+                <!-- Injected DOM Output Sink -->
+                <div id="output" style="margin-top: 10px;"></div>
+            </div>
+
+            <!-- Impact Comparison View -->
+            <h3>Before Attack vs After Simulation View</h3>
+            <div class="comparison-grid">
+                <div class="comparison-col comparison-before">
+                    <strong style="color: #2e7d32;">Original State (Before Attack)</strong>
+                    <p style="margin: 4px 0 0 0;">Status: <span class="status-badge status-operational">● System Operational</span></p>
+                    <p style="margin: 4px 0 0 0;">Heading: <em>"Student Portal Dashboard - Official Portal"</em></p>
+                    <p style="margin: 4px 0 0 0; color: #555;">Legitimate dashboard operational; zero alert banners.</p>
+                </div>
+                <div class="comparison-col comparison-after">
+                    <strong style="color: #c62828;">Compromised State (After Attack)</strong>
+                    <p style="margin: 4px 0 0 0;">Status: <span class="status-badge status-compromised">▲ CRITICAL COMPROMISE</span></p>
+                    <p style="margin: 4px 0 0 0;">Heading: <em>"⚠️ DEFACED: Student Portal Tampered via DOM XSS"</em></p>
+                    <p style="margin: 4px 0 0 0; color: #555;">Dashboard heading defaced; status card modified.</p>
+                </div>
+            </div>
+
+            <!-- Preset Demonstration Payloads -->
+            <h3>Test Visible Impact Payloads (Client-Side):</h3>
+            <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 15px;">
+                <a href="/dom-demo?message=Welcome+to+the+Student+Portal." class="btn btn-secondary">Safe URL Message</a>
+                <a href="/dom-demo?message=%3Cimg+src%3Dx+onerror%3D%22triggerDomDefacement()%22%3E" class="btn btn-danger">
+                    Simulate Live Dashboard &amp; Status Defacement
+                </a>
+                <a href="/dom-demo?message=%3Cdiv+class%3D%22alert+alert-warning%22+style%3D%22border%3A2px+solid+%23856404%3Bmargin%3A10px+0%3B%22%3E%3Cstrong%3E%E2%9A%A0%EF%B8%8F+Unauthorized+Content+Modification%3A%3C%2Fstrong%3E+Fake+security+notice+injected+via+innerHTML.%3C%2Fdiv%3E" class="btn btn-danger">
+                    Simulate Injected Banner Payload
+                </a>
+            </div>
+
+            <!-- Reset Button -->
+            <div style="margin: 20px 0; padding: 14px; background-color: #fafbfc; border: 1px solid #d0d7de; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; border-radius: 4px;">
+                <div>
+                    <strong>Reset Page:</strong> Clears the URL parameter and immediately restores original dashboard heading, status card, and "System Operational" status.
+                </div>
+                <a href="/dom-demo" class="btn btn-warning">Reset Page</a>
+            </div>
+
+            <!-- Impact Explanation -->
+            <div style="padding: 12px 15px; background-color: #f8f9fa; border: 1px solid #e9ecef; border-radius: 4px; font-size: 13px; color: #555; margin-bottom: 20px;">
+                <strong>Explanation:</strong> DOM-Based XSS occurs when client-side JavaScript reads untrusted input (such as URL parameters or hash fragments) and passes it to an execution sink like <code>innerHTML</code> or <code>document.write()</code>. The attack executes entirely inside the victim's browser memory without requiring malicious payload reflection from the web server.
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>XSS Demonstration and Prevention | BTech Cybersecurity Semester Project</p>
+    </footer>
+
+    <!-- Vulnerable script reads message from URL and assigns to output.innerHTML -->
+    <script src="dom-demo.js"></script>
+
+</body>
+
+</html>
